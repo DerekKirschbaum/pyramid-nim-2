@@ -3,7 +3,15 @@ import Line from './Line'
 
 export default function App () {
 
-  const [state, setState] = React.useState(true)
+  const [lineElements, setLineElements] = React.useState(newLines())
+
+  function newLines () {
+    const list = []
+    for(let i=0; i<15; i++){
+      list.push(i+1)
+    }
+    return list
+  }
 
   return (
     <div className='main'>
@@ -15,7 +23,7 @@ export default function App () {
         </p>
       </div>
       <div className='gameBox'>
-        <Line text={state}/>
+        <Line text={lineElements}/>
       </div>
       
     </div>
