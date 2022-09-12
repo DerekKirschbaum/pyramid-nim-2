@@ -1,0 +1,30 @@
+.header {
+
+}
+
+.main {
+  padding: 10px;
+  background-color: red;
+}
+
+.header {
+  padding: 10px;
+  background-color: green;
+}
+
+.title, .instructions {
+  text-align: center;
+}
+
+.gameBox {
+  padding: 10px;
+  background-color: yellow;
+}
+
+.line {
+  padding: 10px;
+  background-color: aqua;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}

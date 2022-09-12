@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Line from './Line'
 
-function App() {
+export default function App () {
+
+  const [state, setState] = React.useState("Testing")
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className='main'>
+      <div className='header'>
+        <h1 className='title'>Pyramid Nim</h1>
+        <p className='instructions'>Players alternate turns, crossing off as many 
+          adjacent lines in the same row as they want. 
+          The winner is the player that crosses off the last line.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+      <div className='gameBox'>
+        <Line text={state}/>
+      </div>
+      
     </div>
   );
-}
-
-export default App;
+};
