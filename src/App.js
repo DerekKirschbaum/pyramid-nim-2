@@ -8,10 +8,14 @@ export default function App () {
   function newLines () {
     const list = []
     for(let i=0; i<15; i++){
-      list.push(i+1)
+      list.push({
+        key: i+1,
+        id: i + 1
+      })
     }
     return list
   }
+
 
   return (
     <div className='main'>
@@ -23,7 +27,7 @@ export default function App () {
         </p>
       </div>
       <div className='gameBox'>
-        <Line text={lineElements}/>
+        <Line text={lineElements.id}/>
       </div>
       
     </div>
