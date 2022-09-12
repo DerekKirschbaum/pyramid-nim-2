@@ -3,7 +3,7 @@ import Line from './Line'
 
 export default function App () {
 
-  const [state, setState] = React.useState("Testing")
+  const [state, setState] = React.useState(true)
 
   return (
     <div className='main'>
