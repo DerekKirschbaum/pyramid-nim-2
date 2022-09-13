@@ -1,4 +1,7 @@
 import React from 'react'
+import BlackLine from './Images/BlackLine.jpg'
+import BlueCrossedLine from './Images/BlueCrossedLine.jpg'
+import RedCrossedLine from './Images/RedCrossedLine.jpg'
 
 
 
