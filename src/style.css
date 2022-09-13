@@ -1,11 +1,14 @@
+body {
+  background-image: url("./Images/lightBlueGradient.jpeg");
+  
+}
+
 .main {
   padding: 10px;
-  background-color: red;
 }
 
 .header {
   padding: 10px;
-  background-color: green;
 }
 
 .title, .instructions {
@@ -14,13 +17,36 @@
 
 .gameBox {
   padding: 10px;
-  background-color: yellow;
+  background-image: url("./Images/lightBlueGradient.jpeg");
+}
+
+.row1, .row2, .row3, .row4, .row5 {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .line {
-  padding: 10px;
-  background-color: aqua;
-  border-width: 2px;
-  border-color: black;
-  border-style: solid;
+  padding: 0px;
+  margin-right: 20px;
+  background-color: white;
+  display: flex;
+  height: 75px;
+  width: 75px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.line:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.line-img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
