@@ -18,7 +18,8 @@ export default function App () {
         id: i + 1,
         isCrossed: false,
         redPlayer: true,
-        src: BlackLine
+        src: BlackLine,
+        canChange: true
       })
     }
     let count = 0
@@ -33,8 +34,16 @@ export default function App () {
 
   function crossLine (id) {
     setLines(oldLines => oldLines.map(line => 
-        line.id === id ? 
+        line.id === id && line.canChange? 
           {...line, isCrossed: !line.isCrossed} : 
+          line
+      ))
+  }
+
+  function nextTurn () {
+    setLines(oldLines => oldLines.map(line => 
+        line.isCrossed ? 
+          {...line, redPlayer: !line.redPlayer, canChange: !line.canChange} :
           line
       ))
   }
@@ -47,6 +56,7 @@ export default function App () {
       redPlayer={line.redPlayer}
       src={line.src}
       row={line.row}
+      canChange={line.canChange}
       crossLine={() => crossLine(line.id)}
     />
     ))
@@ -89,8 +99,10 @@ export default function App () {
             {lineElements[13]}
             {lineElements[14]}
           </div>
-
         </div>
+        <button className='nextTurn' onClick={nextTurn}>
+          Next Turn
+        </button>
         
       </div>
     </main>

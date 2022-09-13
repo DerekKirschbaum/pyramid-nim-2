@@ -50,3 +50,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.nextTurn {
+  padding: 5px;
+  width: 10%;
+  height: 10%;
+  margin-top: 20px;
+  background-color: gray;
+}

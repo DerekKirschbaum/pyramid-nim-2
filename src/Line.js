@@ -1,12 +1,14 @@
 import React from 'react'
-import BlackLine from './Images/BlackLine.jpg'
-import BlueCrossedLine from './Images/BlueCrossedLine.jpg'
-import RedCrossedLine from './Images/RedCrossedLine.jpg'
+
 
 
 export default function Line (props) {
-    const imgSrc = props.isCrossed ? RedCrossedLine : BlackLine
-    const x = BlueCrossedLine
+    const player = props.redPlayer
+    if(player) {
+        const imgSrc = props.isCrossed ? RedCrossedLine : BlackLine
+    } else {
+        const imgSrc = props.isCrossed ? BlueCrossedLine : BlackLine
+    }
 
     return (
         <div className='line' onClick={props.crossLine}>
