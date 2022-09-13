@@ -7,10 +7,11 @@ import RedCrossedLine from './Images/RedCrossedLine.jpg'
 
 export default function Line (props) {
     const player = props.redPlayer
+    const imgSrc = props.src
     if(player) {
-        const imgSrc = props.isCrossed ? RedCrossedLine : BlackLine
+        imgSrc = props.isCrossed ? RedCrossedLine : BlackLine
     } else {
-        const imgSrc = props.isCrossed ? BlueCrossedLine : BlackLine
+        imgSrc = props.isCrossed ? BlueCrossedLine : BlackLine
     }
 
     return (
