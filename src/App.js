@@ -39,14 +39,19 @@ export default function App () {
           line
       ))
   }
-
+/*
   function nextTurn () {
     setLines(oldLines => oldLines.map(line => 
         line.isCrossed ? 
           {...line, redPlayer: !line.redPlayer, canChange: !line.canChange} :
           line
       ))
-  }
+
+
+             <button className='nextTurn' onClick={nextTurn}>
+          Next Turn
+        </button>
+  }*/
 
   const lineElements = (lines.map(line => 
     <Line 
@@ -100,9 +105,7 @@ export default function App () {
             {lineElements[14]}
           </div>
         </div>
-        <button className='nextTurn' onClick={nextTurn}>
-          Next Turn
-        </button>
+        
         
       </div>
     </main>
