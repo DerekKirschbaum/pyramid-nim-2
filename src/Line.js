@@ -6,6 +6,7 @@ import RedCrossedLine from './Images/RedCrossedLine.jpg'
 
 
 export default function Line (props) {
+
     let imgSrc
     if(props.redPlayer) {
         imgSrc = props.isCrossed ? RedCrossedLine : BlackLine
@@ -14,7 +15,7 @@ export default function Line (props) {
     }
 
     return (
-        <div className='line' onClick={props.crossLine}>
+        <div className={(props.isCrossed && props.canChange)? 'line-selected' : 'line'} onClick={props.crossLine}>
                 <img className='line-img' src={imgSrc} alt="line"/>
         </div>
     )

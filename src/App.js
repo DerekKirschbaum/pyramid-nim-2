@@ -1,8 +1,8 @@
 import React from 'react'
 import Line from './Line'
 import BlackLine from './Images/BlackLine.jpg'
-import BlueCrossedLine from './Images/BlueCrossedLine.jpg'
-import RedCrossedLine from './Images/RedCrossedLine.jpg'
+//import BlueCrossedLine from './Images/BlueCrossedLine.jpg'
+//import RedCrossedLine from './Images/RedCrossedLine.jpg'
 
 
 export default function App () {
@@ -34,18 +34,24 @@ export default function App () {
 
   function crossLine (id) {
     setLines(oldLines => oldLines.map(line => 
-        line.id === id && line.canChange? 
+        (line.id === id && line.canChange) ? 
           {...line, isCrossed: !line.isCrossed} : 
           line
       ))
   }
 
   function nextTurn () {
-    setLines(oldLines => oldLines.map(line => 
-        line.isCrossed ? 
-          {...line, redPlayer: !line.redPlayer, canChange: !line.canChange} :
-          line
-      ))
+    setLines(oldLines => oldLines.map(function(line) {
+      if(line.canChange) {
+        if(line.isCrossed) {
+          return {...line, canChange: !line.canChange} 
+        } else {
+          return {...line, redPlayer: !line.redPlayer}
+        }
+      } else {
+        return {...line}
+      }
+    }))
   }
 
   const lineElements = (lines.map(line => 
@@ -100,9 +106,11 @@ export default function App () {
             {lineElements[14]}
           </div>
         </div>
-        <button className='nextTurn' onClick={nextTurn}>
-          Next Turn
-        </button>
+        <div className='nextTurnDiv'>
+          <button className='nextTurn' onClick={nextTurn}>
+            Next Turn
+          </button>
+        </div>
         
       </div>
     </main>
