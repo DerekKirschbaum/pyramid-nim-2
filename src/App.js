@@ -8,6 +8,14 @@ import BlackLine from './Images/BlackLine.jpg'
 export default function App () {
 
   const [lines, setLines] = React.useState(newLines())
+  const[gameFinished, setGameFinished] = React.useState(false)
+
+  React.useEffect(() => {
+    const allCrossed = lines.every(line => line.canChange)
+    if(allCrossed) {
+      setGameFinished(true)
+    }
+  }, [lines])
 
 
   function newLines () {
@@ -41,17 +49,22 @@ export default function App () {
   }
 
   function nextTurn () {
-    setLines(oldLines => oldLines.map(function(line) {
-      if(line.canChange) {
-        if(line.isCrossed) {
-          return {...line, canChange: !line.canChange} 
+    if(!gameFinished) {
+      setLines(oldLines => oldLines.map(function(line) {
+        if(line.canChange) {
+          if(line.isCrossed) {
+            return {...line, canChange: !line.canChange} 
+          } else {
+            return {...line, redPlayer: !line.redPlayer}
+          }
         } else {
-          return {...line, redPlayer: !line.redPlayer}
+          return {...line}
         }
-      } else {
-        return {...line}
-      }
-    }))
+      }))
+    } else {
+      setGameFinished(false)
+      setLines(newLines())
+    }
   }
 
   const lineElements = (lines.map(line => 
@@ -109,7 +122,7 @@ export default function App () {
           </div>
           <div className='nextTurnDiv'>
             <button className='nextTurn' onClick={nextTurn}>
-              Next Turn
+              {gameFinished ? 'New Game' : 'Next Turn'}
             </button>
           </div>
         </div>
