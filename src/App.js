@@ -11,7 +11,7 @@ export default function App () {
   const[gameFinished, setGameFinished] = React.useState(false)
 
   React.useEffect(() => {
-    const allCrossed = lines.every(line => line.canChange)
+    const allCrossed = lines.every(line => !line.canChange)
     if(allCrossed) {
       setGameFinished(true)
     }
