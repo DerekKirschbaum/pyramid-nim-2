@@ -17,6 +17,7 @@ body {
 
 .gameBox {
   padding: 10px;
+  display: flex;
 }
 
 .row1, .row2, .row3, .row4, .row5 {
@@ -67,6 +68,10 @@ body {
   justify-content: center;
   align-items: center;
   background-image: url("./Images/Light-Blue-Gradient-Background.jpeg");
+}
+.nextTurn:hover {
+  background-color:#b8c0d8;
+  transition: 0.7s;
 }
 
 .nextTurnDiv {

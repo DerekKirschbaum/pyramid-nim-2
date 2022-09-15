@@ -79,37 +79,39 @@ export default function App () {
           </p>
         </div>
         <div className='gameBox'>
-          <div className='row1'>
-            {lineElements[0]}
-          </div>
-          <div className='row2'>
-            {lineElements[1]}
-            {lineElements[2]}
+          <div className="rows">
+            <div className='row1'>
+              {lineElements[0]}
+            </div>
+            <div className='row2'>
+              {lineElements[1]}
+              {lineElements[2]}
 
+            </div>
+            <div className='row3'>
+              {lineElements[3]}
+              {lineElements[4]}
+              {lineElements[5]}
+            </div>
+            <div className='row4'>
+              {lineElements[6]}
+              {lineElements[7]}
+              {lineElements[8]}
+              {lineElements[9]}
+            </div>
+            <div className='row5'>
+              {lineElements[10]}
+              {lineElements[11]}
+              {lineElements[12]}
+              {lineElements[13]}
+              {lineElements[14]}
+            </div>
           </div>
-          <div className='row3'>
-            {lineElements[3]}
-            {lineElements[4]}
-            {lineElements[5]}
+          <div className='nextTurnDiv'>
+            <button className='nextTurn' onClick={nextTurn}>
+              Next Turn
+            </button>
           </div>
-          <div className='row4'>
-            {lineElements[6]}
-            {lineElements[7]}
-            {lineElements[8]}
-            {lineElements[9]}
-          </div>
-          <div className='row5'>
-            {lineElements[10]}
-            {lineElements[11]}
-            {lineElements[12]}
-            {lineElements[13]}
-            {lineElements[14]}
-          </div>
-        </div>
-        <div className='nextTurnDiv'>
-          <button className='nextTurn' onClick={nextTurn}>
-            Next Turn
-          </button>
         </div>
         
       </div>
