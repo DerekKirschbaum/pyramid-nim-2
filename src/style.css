@@ -18,8 +18,14 @@ body {
 .gameBox {
   padding: 10px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
+.rows {
+  margin-right: 20px;
+}
 .row1, .row2, .row3, .row4, .row5 {
   padding: 15px;
   display: flex;
