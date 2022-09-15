@@ -1,3 +1,6 @@
+//check if certain moves are valid or not, don't let user enter nothing
+
+
 import React from 'react'
 import Line from './Line'
 import BlackLine from './Images/BlackLine.jpg'
@@ -9,6 +12,7 @@ export default function App () {
 
   const [lines, setLines] = React.useState(newLines())
   const[gameFinished, setGameFinished] = React.useState(false)
+  const[validMove, setValidMove] = React.useState(false)
 
   React.useEffect(() => {
     const allCrossed = lines.every(line => !line.canChange)
