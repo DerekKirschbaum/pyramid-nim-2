@@ -42,16 +42,9 @@ body {
   width: 75px;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+  
+  box-shadow: 0px 0px 2px 5px rgba(41, 88, 7, 0.5);
   cursor: pointer;
-}
-
-.line-selected {
-  outline: 2px groove green;
-}
-
-.line:active, .line-selected:active {
-  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
 .line-img {
@@ -66,16 +59,16 @@ body {
   width: 250px;
   height: auto;
   font-size: 40px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./Images/Light-Blue-Gradient-Background.jpeg");
+  background-color: #cdd5ec;
 }
 .nextTurn:hover {
   background-color:#b8c0d8;
-  transition: 0.7s;
+  transition: 0.3s;
 }
 
 .nextTurnDiv {

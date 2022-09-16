@@ -12,6 +12,7 @@ export default function App () {
 
   const [lines, setLines] = React.useState(newLines())
   const[gameFinished, setGameFinished] = React.useState(false)
+  const[turn, setTurn] = React.useState(1)
   const[validMove, setValidMove] = React.useState(false)
 
   React.useEffect(() => {
@@ -31,7 +32,8 @@ export default function App () {
         isCrossed: false,
         redPlayer: true,
         src: BlackLine,
-        canChange: true
+        canChange: true,
+        turn: 0
       })
     }
     let count = 0
@@ -54,10 +56,11 @@ export default function App () {
 
   function nextTurn () {
     if(!gameFinished) {
+      setTurn(oldTurn => oldTurn + 1)
       setLines(oldLines => oldLines.map(function(line) {
         if(line.canChange) {
           if(line.isCrossed) {
-            return {...line, canChange: !line.canChange} 
+            return {...line, canChange: !line.canChange, turn: turn} 
           } else {
             return {...line, redPlayer: !line.redPlayer}
           }
@@ -68,6 +71,7 @@ export default function App () {
     } else {
       setGameFinished(false)
       setLines(newLines())
+      setTurn(1)
     }
   }
 
@@ -80,6 +84,7 @@ export default function App () {
       src={line.src}
       row={line.row}
       canChange={line.canChange}
+      turn={line.turn}
       crossLine={() => crossLine(line.id)}
     />
     ))
