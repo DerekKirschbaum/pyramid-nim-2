@@ -16,11 +16,32 @@ export default function App () {
   const[validMove, setValidMove] = React.useState(false)
 
   React.useEffect(() => {
+    console.log("effect")
     const allCrossed = lines.every(line => !line.canChange)
+    console.log("allcrossed: " + allCrossed)
     if(allCrossed) {
       setGameFinished(true)
+    } else {
+      setValidMove(false)
+      let selectedLines = []
+      for(let i =0; i<15; i++) {
+        if(lines[i].turn == turn){
+          selectedLines.push(lines[i])
+        }
+      }
+      console.log(selectedLines)
+      if(selectedLines.length > 0){
+        setValidMove(true)
+        const selectedRow = selectedLines[0].row
+        for(let i=0; i<selectedLines.length; i++) {
+          if(selectedLines[i].row !== selectedRow) {
+            setValidMove(false)
+          }
+        }
+      }
     }
-  }, [lines])
+
+  }, [lines, turn] )
 
 
   function newLines () {
@@ -47,16 +68,27 @@ export default function App () {
   }
 
   function crossLine (id) {
-    setLines(oldLines => oldLines.map(line => 
-        (line.id === id && line.canChange) ? 
-          {...line, isCrossed: !line.isCrossed} : 
-          line
-      ))
+    setLines(oldLines => oldLines.map(function(line) {
+      if(line.id === id && line.canChange) {
+        if(line.isCrossed){
+          return {...line, isCrossed: !line.isCrossed, turn: 0}
+        } else {
+          return {...line, isCrossed: !line.isCrossed, turn: turn}
+        }
+      } else {
+        return {...line}
+      }
+    }))
   }
 
   function nextTurn () {
-    if(!gameFinished) {
+    if(gameFinished) {
+      setGameFinished(false)
+      setLines(newLines())
+      setTurn(1)
+    } else if(validMove) {
       setTurn(oldTurn => oldTurn + 1)
+      setValidMove(false)
       setLines(oldLines => oldLines.map(function(line) {
         if(line.canChange) {
           if(line.isCrossed) {
@@ -68,12 +100,9 @@ export default function App () {
           return {...line}
         }
       }))
-    } else {
-      setGameFinished(false)
-      setLines(newLines())
-      setTurn(1)
     }
   }
+  
 
   const lineElements = (lines.map(line => 
     <Line 

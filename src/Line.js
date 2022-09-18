@@ -17,6 +17,7 @@ export default function Line (props) {
     return (
         <div className={(props.isCrossed && props.canChange)? 'line-selected' : 'line'} onClick={props.crossLine}>
                 <img className='line-img' src={imgSrc} alt="line"/>
+                <h1>{props.turn}</h1>
         </div>
     )
 }
