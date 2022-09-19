@@ -14,11 +14,11 @@ export default function App () {
   const[gameFinished, setGameFinished] = React.useState(false)
   const[turn, setTurn] = React.useState(1)
   const[validMove, setValidMove] = React.useState(false)
+  const[tryAgain, setTryAgain] = React.useState(false)
 
   React.useEffect(() => {
     console.log("effect")
     const allCrossed = lines.every(line => !line.canChange)
-    console.log("allcrossed: " + allCrossed)
     if(allCrossed) {
       setGameFinished(true)
     } else {
@@ -31,6 +31,7 @@ export default function App () {
       }
       console.log(selectedLines)
       if(selectedLines.length > 0){
+        console.log("same row check")
         setValidMove(true)
         const selectedRow = selectedLines[0].row
         for(let i=0; i<selectedLines.length; i++) {
@@ -38,6 +39,16 @@ export default function App () {
             setValidMove(false)
           }
         }
+        //console.log("in row check")
+        const minId = selectedLines[0].id
+        const maxId = selectedLines[selectedLines.length-1].id
+        for(let i=minId-1; i<maxId; i++) {
+          if((lines[i].turn > 0) && (lines[i].turn !== selectedLines[0].turn)){
+            setValidMove(false)
+          }
+        }
+        
+
       }
     }
 
@@ -82,6 +93,7 @@ export default function App () {
   }
 
   function nextTurn () {
+    console.log('nextTurn validMove: ' + validMove)
     if(gameFinished) {
       setGameFinished(false)
       setLines(newLines())
@@ -89,6 +101,7 @@ export default function App () {
     } else if(validMove) {
       setTurn(oldTurn => oldTurn + 1)
       setValidMove(false)
+      setTryAgain(false)
       setLines(oldLines => oldLines.map(function(line) {
         if(line.canChange) {
           if(line.isCrossed) {
@@ -100,6 +113,8 @@ export default function App () {
           return {...line}
         }
       }))
+    } else {
+      setTryAgain(true)
     }
   }
   
@@ -162,6 +177,7 @@ export default function App () {
             <button className='nextTurn' onClick={nextTurn}>
               {gameFinished ? 'New Game' : 'Next Turn'}
             </button>
+            <h2>{tryAgain ? 'Invalid Move' : ('Turn: ' + turn)}</h2>
           </div>
         </div>
         
