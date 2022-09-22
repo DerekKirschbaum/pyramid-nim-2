@@ -71,6 +71,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #cdd5ec;
+  cursor: pointer;
 }
 .nextTurn:hover {
   background-color:#b8c0d8;

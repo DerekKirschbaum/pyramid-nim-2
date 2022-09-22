@@ -25,7 +25,7 @@ export default function App () {
       setValidMove(false)
       let selectedLines = []
       for(let i =0; i<15; i++) {
-        if(lines[i].turn == turn){
+        if(lines[i].turn === turn){
           selectedLines.push(lines[i])
         }
       }
