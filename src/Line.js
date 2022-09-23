@@ -15,7 +15,7 @@ export default function Line (props) {
     }
 
     return (
-        <div className={(props.isCrossed && props.canChange)? 'line-selected' : 'line'} onClick={props.crossLine}>
+        <div className={!props.highlightColor ? 'line-selected-red' : (props.isCrossed && props.canChange)? 'line-selected' : 'line'} onClick={props.crossLine}>
                 <img className='line-img' src={imgSrc} alt="line"/>
         </div>
     )

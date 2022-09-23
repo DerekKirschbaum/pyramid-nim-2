@@ -15,6 +15,7 @@ export default function App () {
   const[turn, setTurn] = React.useState(1)
   const[validMove, setValidMove] = React.useState(false)
   const[tryAgain, setTryAgain] = React.useState(false)
+  const[redTurn, setRedTurn] = React.useState(true)
 
   React.useEffect(() => {
     console.log("effect")
@@ -24,6 +25,7 @@ export default function App () {
     } else {
       setValidMove(false)
       let selectedLines = []
+      let invalidIds = []
       for(let i =0; i<15; i++) {
         if(lines[i].turn === turn){
           selectedLines.push(lines[i])
@@ -37,6 +39,14 @@ export default function App () {
         for(let i=0; i<selectedLines.length; i++) {
           if(selectedLines[i].row !== selectedRow) {
             setValidMove(false)
+            invalidIds.push(selectedLines[i].id)
+            /*setLines(oldLines => oldLines.map((line) => {
+              if(line.id === selectedLines[i].id) {
+                return {...line, highlightColor: false}
+              } else {
+                return {...line, highlightColor: true}
+              }
+            }))*/
           }
         }
         //console.log("in row check")
@@ -45,9 +55,29 @@ export default function App () {
         for(let i=minId-1; i<maxId; i++) {
           if((lines[i].turn > 0) && (lines[i].turn !== selectedLines[0].turn)){
             setValidMove(false)
+            invalidIds.push(selectedLines[i].id)
+            /*setLines(oldLines => oldLines.map((line) => {
+              if(line.id === selectedLines[i].id) {
+                return {...line, highlightColor: false}
+              } else {
+                return {...line, highlightColor: true}
+              }
+            }))*/
           }
         }
+
+        //infinite loop? fix this to make boxes red when move is invalid
         
+        /*console.log(invalidIds)
+        for(let i=0; i<invalidIds.length; i++){
+          setLines(oldLines => oldLines.map(function(line) {
+            if(line.id === invalidIds[i]){
+              return {...line, highlightColor: true}
+            } else {
+              return {...line}
+            }
+          }))
+        }*/
 
       }
     }
@@ -65,7 +95,8 @@ export default function App () {
         redPlayer: true,
         src: BlackLine,
         canChange: true,
-        turn: 0
+        turn: 0,
+        highlightColor: true
       })
     }
     let count = 0
@@ -93,13 +124,15 @@ export default function App () {
   }
 
   function nextTurn () {
-    console.log('nextTurn validMove: ' + validMove)
+    //console.log('nextTurn validMove: ' + validMove)
     if(gameFinished) {
       setGameFinished(false)
       setLines(newLines())
       setTurn(1)
+      setRedTurn(true)
     } else if(validMove) {
       setTurn(oldTurn => oldTurn + 1)
+      setRedTurn(oldRedTurn => !oldRedTurn)
       setValidMove(false)
       setTryAgain(false)
       setLines(oldLines => oldLines.map(function(line) {
@@ -129,6 +162,7 @@ export default function App () {
       row={line.row}
       canChange={line.canChange}
       turn={line.turn}
+      highlightColor={line.highlightColor}
       crossLine={() => crossLine(line.id)}
     />
     ))
@@ -177,7 +211,13 @@ export default function App () {
             <button className='nextTurn' onClick={nextTurn}>
               {gameFinished ? 'New Game' : 'Next Turn'}
             </button>
-            <h2>{tryAgain ? 'Invalid Move' : ('Turn: ' + turn)}</h2>
+            <button className="turn-info">
+              <span className={redTurn ? 'red' : 'blue'}>
+                {gameFinished ? (redTurn ? 'Red Player Wins!' : 'Blue Player Wins!') : redTurn ? "Red Player's Turn" : "Blue Player's Turn"}
+              </span>
+              <br/>
+              {gameFinished ? ('Turns: ' + turn) : tryAgain ? 'Invalid Move' : ('Turn: ' + turn)}
+            </button>
           </div>
         </div>
         
