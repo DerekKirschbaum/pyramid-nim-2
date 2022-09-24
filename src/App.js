@@ -16,6 +16,7 @@ export default function App () {
   const[validMove, setValidMove] = React.useState(false)
   const[tryAgain, setTryAgain] = React.useState(false)
   const[redTurn, setRedTurn] = React.useState(true)
+  const[invalidIdsList, setInvalidIdsList] = React.useState([])
 
   React.useEffect(() => {
     console.log("effect")
@@ -31,54 +32,37 @@ export default function App () {
           selectedLines.push(lines[i])
         }
       }
-      console.log(selectedLines)
       if(selectedLines.length > 0){
-        console.log("same row check")
         setValidMove(true)
         const selectedRow = selectedLines[0].row
         for(let i=0; i<selectedLines.length; i++) {
           if(selectedLines[i].row !== selectedRow) {
             setValidMove(false)
             invalidIds.push(selectedLines[i].id)
-            /*setLines(oldLines => oldLines.map((line) => {
-              if(line.id === selectedLines[i].id) {
-                return {...line, highlightColor: false}
-              } else {
-                return {...line, highlightColor: true}
-              }
-            }))*/
           }
         }
-        //console.log("in row check")
         const minId = selectedLines[0].id
         const maxId = selectedLines[selectedLines.length-1].id
         for(let i=minId-1; i<maxId; i++) {
           if((lines[i].turn > 0) && (lines[i].turn !== selectedLines[0].turn)){
             setValidMove(false)
             invalidIds.push(selectedLines[i].id)
-            /*setLines(oldLines => oldLines.map((line) => {
-              if(line.id === selectedLines[i].id) {
-                return {...line, highlightColor: false}
-              } else {
-                return {...line, highlightColor: true}
-              }
-            }))*/
           }
         }
-
+        //console.log(invalidIds)
+        //setInvalidIdsList(
+        //console.log("ivl: " + invalidIdsList)
         //infinite loop? fix this to make boxes red when move is invalid
-        
         /*console.log(invalidIds)
-        for(let i=0; i<invalidIds.length; i++){
-          setLines(oldLines => oldLines.map(function(line) {
+        setLines(oldLines => oldLines.map(function(line) {
+          for(let i=0; i<invalidIds.length; i++){ 
             if(line.id === invalidIds[i]){
               return {...line, highlightColor: true}
-            } else {
-              return {...line}
             }
-          }))
-        }*/
-
+          }
+          return {...line}
+        }))*/
+        
       }
     }
 
@@ -124,7 +108,6 @@ export default function App () {
   }
 
   function nextTurn () {
-    //console.log('nextTurn validMove: ' + validMove)
     if(gameFinished) {
       setGameFinished(false)
       setLines(newLines())
